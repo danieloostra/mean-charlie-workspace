@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Survey Redux</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var socket = io.connect();
+            $('button').click(function() {
+                socket.emit("survey_submission", {
+                    name: $('input[name=name]').val(),
+                    location: $('select[name=location]').val(),
+                    language: $('select[name=language]').val(),
+                    comment: $('textarea[name=comment]').val(),
+                });
+            });
+            socket.on('server_response', function(data) {
+                $('#result').html(`<p>${data.message}</p><p>Your server-generated lucky number is ${data.lucky_num}! Good luck!</p>`)
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="result">
+
+    </div>
+    <form id="survey" action="/result" method="post">
+        <p>Your Name: <input type="text" name="name" /></p>
+        <p>
+            Dojo Location:
+            <select name="location">
+                <option value="Seattle">Seattle, WA</option>
+                <option value="Washington">Washington, DC</option>
+                <option value="Chicago">Chicago, IL</option>
+            </select>
+        </p>
+        <p>
+            Favorite Language:
+            <select name="language">
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Ruby">Ruby</option>
+            </select>
+        </p>
+        <p>Comment:</p>
+        <p><textarea name="comment" rows="8" cols="40" placeholder="Enter Comment Here..."></textarea></p>
+        <button type="button" name="form_submit">Submit</button>
+    </form>
+</body>
+</html>
