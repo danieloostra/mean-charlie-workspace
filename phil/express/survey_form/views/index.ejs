@@ -1,0 +1,24 @@
+<body>
+    <form action="/result" method="post">
+        <p>Your Name: <input type="text" name="name" /></p>
+        <p>
+            Dojo Location:
+            <select name="location">
+                <option value="Seattle">Seattle, WA</option>
+                <option value="Washington">Washington, DC</option>
+                <option value="Chicago">Chicago, IL</option>
+            </select>
+        </p>
+        <p>
+            Favorite Language:
+            <select name="language">
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Ruby">Ruby</option>
+            </select>
+        </p>
+        <p>Comment:</p>
+        <p><textarea name="comment" rows="8" cols="40" placeholder="Enter Comment Here..."></textarea></p>
+        <input type="submit" value="Submit" />
+    </form>
+</body>
