@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#container {
+    width: 70%;
+    margin: 0 auto;
+    background-color: lightblue;
+    text-align: center;
+    padding: 0 4% 4% 4%;
+}
+#container h2 {
+    padding: 24px;
+    font-family:sans-serif;
+}
+#login {
+    margin: 20% auto;
+    display: inline-block;
+    border: 1px solid #111;
+    background-color: #fff;
+    padding: 16px;
+}
+#chat-wrapper {
+    padding: 1%;
+    width: 98%;
+    height: 500px;
+    background-color: #fff;
+    text-align: left;
+    overflow-y: scroll;
+    border-radius: 12px;
+}
+#chat-wrapper p {
+    margin-bottom: 4px;
+}
+#chat-wrapper p.join {
+    color: darkblue;
+}
+#chat-wrapper p.exit {
+    color: grey;
+    font-style: italic;
+}
+#chat-wrapper p span.username {
+    display: inline-block;
+    width: 5%;
+    font-weight: bold;
+}
+#message {
+    margin: 16px 0;
+    padding: 1%;
+    width: 98%;
+    height: 60px;
+    border-radius: 12px;
+    resize: none;
+}
+#send {
+    float: right;
+    font-size: 20px;
+    padding: 2px 10px;
+    border-radius: 8px;
+    background-color: #1f1f1f;
+    color: #eee;
+}
