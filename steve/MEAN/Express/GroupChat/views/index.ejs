@@ -1,0 +1,34 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+       
+    	$(document).ready(function (){
+            var socket = io.connect();
+            //prompts the user 
+            var name = prompt("Please enter your name to chat");
+            //emits the name entered from client to server #1
+            socket.emit("page_load", {user: name});
+            socket.on("existing_user", function(data) {
+                console.log(data);
+            })
+            socket.on("load_messages", function(data) {
+                console.log(data);
+            })
+    	});
+    </script>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <div id ="container">
+        <p>Conversation Board</p>
+        <div></div>
+        <form>
+            <input type='text' placeholder="enter your message here">
+            <input type='submit' value='Send'>
+        </form>
+</body>
+</html>

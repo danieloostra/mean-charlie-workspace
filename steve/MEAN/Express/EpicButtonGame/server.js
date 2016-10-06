@@ -20,13 +20,21 @@ var server = app.listen(8000, function() {
 });
 
 var io = require('socket.io').listen(server)
+var count = 0;
 
 io.sockets.on('connection', function (socket) {
-  socket.on("posting_form", function (data){
-  	console.log(data);
-    	var random_number = Math.floor(Math.random() * 1000) + 1;
-  	socket.emit("updated_message", {response: data});
-  	socket.emit("random_number", {response: random_number});
-
-  })
+	console.log("WE ARE USING SOCKETS!");
+  	console.log(socket.id);
+  	socket.on("button_clicked", function (data) {
+  		count += 1;
+  		console.log(data);
+  		console.log(count);
+  		socket.emit("count", {response: count});
+  	})
+  	socket.on("reset_clicked", function (data) {
+  		count = 0;
+  		console.log(data);
+  		console.log(count);
+  		socket.emit("reset", {response: count});
+  	})
 })
