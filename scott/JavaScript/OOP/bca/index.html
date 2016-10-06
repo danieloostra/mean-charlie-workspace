@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bind, Call and Apply</title>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script>
+	var customObject = {
+		name:'California, Eureka',
+		onClick:function(myParam){
+			console.log("I've been clicked");
+			console.log(myParam, "I've been passed by bind");
+			console.log(this.name);
+		}
+	}
+
+	var newObject = {
+		name: "West Virginia, Montani semper liberi"
+	}
+
+	$(document).ready(function() {
+		$('button').click(customObject.onClick.bind(customObject, "bind this argument" ))
+	})
+	</script>
+</head>
+<body>
+	<button name="button">Click Me</button>
+	<script src="main.js">
+	
+</body>
+</html>

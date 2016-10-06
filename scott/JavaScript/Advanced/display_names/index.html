@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display Name</title>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script>
+	"use strict";
+	$(document).ready(() => {
+		$('#retrieve').click(() => {
+			var name = $('#profile').val()
+			var firstpromise = new Promise (
+					(resolve, reject) => {
+						$.ajax({
+							url: "https://api.github.com/users/" + name,
+							type: "GET",
+							statusCode: {
+								404: () => {
+									reject("Profile not found!")
+								}
+							},
+							success:
+								(data) => {
+									resolve(data);
+								}
+						})
+					}
+				).then((data) => {$('#display').text(data.name)}, (reason) => {$('#display').text(reason)})
+		})
+	})
+	</script>
+</head>
+<body>
+	<p>Enter your GitHub username!</p>
+	<input id="profile" type="text" name="name">
+	<button id="retrieve">Get your name!</button>
+	<h1 id="display"></h1>
+</body>
+</html>

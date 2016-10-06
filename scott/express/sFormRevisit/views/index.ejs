@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+
+            var socket = io.connect();
+
+            var name = "";
+
+            $('#form').submit(function () {
+            	socket.emit('posting_form', {'name': $('#name').val(), 'location': $('#location').val(), 'language': $('#language').val(), 'comments': $('#comments').val()})
+            	return false;
+        	});
+        	socket.on('updated_message', function (data) {
+            	$('#target').text(data.message);
+        	});
+        	socket.on('random_number', function (data) {
+        		$('#number').text(data.randnum);
+	        });
+	    });
+    </script>
+</head>
+<body>
+<h1 id="target">Message</h1>
+<h3 id="number">Number</h3>
+	<form id="form">
+		Name: <input id="name" type="text" name="name">
+		Location: <select id="location" name="location">
+			<option>DC</option>
+			<option>Seattle</option>
+			<option>Chicago</option>
+		</select>
+		Language: <select id="language" name="language">
+			<option>Python</option>
+			<option>JavaScript</option>
+			<option>Ruby</option>
+		</select>
+		Comments: <textarea id="comments" name="comments"></textarea>
+		<input id="submit" type="submit" value="Submit!">
+	</form>
+</body>
+</html>

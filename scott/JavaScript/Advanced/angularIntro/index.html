@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Angular Intro</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script>
+		var app = angular.module('myapp', []);
+		app.directive('helloworld', function() {
+			return {
+				restrict: 'AE',
+				replace: true,
+				template: '<button style="background-color: {{color}}">GO!</button>',
+				link: function(scope, elem, attrs) {
+					console.log(elem)
+					elem.bind('click', function() {
+						scope.$apply(function() {
+							scope.color = 'yellow';
+						});
+					});
+				}
+			}
+		});
+	</script>
+</head>
+<body ng-app='myapp'>
+	<bUtToN helloWorld>More yellow!</button>
+	<p HELLO_WORLD>Will this work?</p>
+	<helloWorld></helloWorld>
+</body>
+</html>

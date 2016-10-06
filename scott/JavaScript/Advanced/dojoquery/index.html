@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DojoQuery</title>
+</head>
+<body>
+	<button id="one">Click</button>
+	<script>
+	"use strict";
+
+	function $Dojo(idtext) {
+		var selected = {
+			element: document.getElementById(idtext),
+			click: (callback) => {
+				selected.element.addEventListener("click", () => {
+					callback();
+				});
+			},
+			hover: (callbackOn, callbackOff) => {
+				selected.element.addEventListener("mouseover", () => {
+					callbackOn();
+				});
+				selected.element.addEventListener("mouseout", () => {
+					callbackOff();
+				});
+			}
+		};
+		return selected;
+	}
+	$Dojo('one').click(() => {console.log("You did it!")})
+	$Dojo('one').hover(() => {console.log("On")}, () => {console.log("Off")})
+	</script>
+</body>
+</html>
