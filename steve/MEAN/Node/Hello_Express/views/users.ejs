@@ -1,0 +1,22 @@
+<html>
+<body>
+    <h2>Here are all the users:</h2>
+    <% for (var x in users) { %>
+        <h3>Name: <%= users[x].name %></h3>
+        <h4>Email: <%= users[x].email %></h4>
+        <hr>
+    <% } %>
+</body>
+</html>
+<input type='text' name='name'>
+<select name = "dojo">
+	<option value="DC">Washington DC</option>
+	<option value="Boston">Boston</option>
+	<option value="LA">Los Angeles</option>
+</select>
+
+<select name = "language">
+	<option value="Java">Java</option>
+	<option value="C++">C++</option>
+	<option value="Ruby">Ruby</option>
+</select> 
