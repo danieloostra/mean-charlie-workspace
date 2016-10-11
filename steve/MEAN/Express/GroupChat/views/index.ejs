@@ -1,0 +1,56 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+       
+    	$(document).ready(function (){
+            //sets up the socket
+            var socket = io.connect();
+            //creates variable to hold current user
+            var current_user;
+            //Creates a New User Function
+            var new_user = function() {
+                var name = prompt("Please enter your name.");
+                socket.emit("page_load", {user: name})
+            }
+            //call new user function
+            new_user();
+
+            //emits the name entered from client to server #1
+            socket.emit("page_load", {user: name});
+            //listens for existing user 
+            socket.on("existing_user", function(data) {
+                $("#error").html(data.error);
+                new_user();
+                console.log("From existing" + data);
+            })
+            //listens for load_messages
+            socket.on("load_messages", function(data) {
+                console.log("load_messages" + data.current_user +data.messages);
+                $("#error").html('');
+                current_user = data.current_user;
+            })
+
+            
+            $("#new_message").submit(function(){
+                socket.emit("new_message", {message: $("#message").val(), user: current_user})
+                return false;
+            })
+            
+    	});
+    </script>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <div id ="container">
+        <p>Conversation Board</p>
+        <div id='error'></div>
+        <form id="new_message">
+            <input type='text' placeholder="enter message" id='message'> 
+            <input type='submit' value='Send'>
+        </form>
+</body>
+</html>

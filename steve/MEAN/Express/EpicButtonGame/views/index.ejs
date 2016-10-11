@@ -1,0 +1,51 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+    	$(document).ready(function (){
+    		var socket = io.connect();
+    		$("#epic_button").click(function (){
+    			socket.emit("button_clicked", {reason: "Clicking the Button"});
+    		
+	    		socket.on("count", function(data) {
+	    			console.log(data);
+	    			$('#output_Text').html("The button has been pushed: " + JSON.stringify(data.response));
+    			});
+    		});
+
+    		$("#reset_button").click(function (){
+    			socket.emit("reset_clicked", {reason: "Reset The Count"});
+
+    			socket.on("reset", function(data) {
+    				console.log(data);
+
+    			});
+
+    		});
+
+    	});
+    </script>
+    <style type="text/css">
+    	#epic_button {
+    			height:100px;
+    			width: 100px;
+    			background-color: blue;
+    		}
+    	#reset_button {
+    			height: 20px;
+    			width: 40px;
+    			background-color: red;
+    		}
+    	
+    </style>
+</head>
+<body>
+
+	<div id="button_text"></div>
+	<div id="output_Text"></div>
+	<button id="epic_button">Push The Epic Button</button>
+	<button id="reset_button">Reset</button>
+
+</body>
+</html>

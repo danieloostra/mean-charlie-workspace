@@ -1,0 +1,18 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+    </script>
+    <style type="text/css">
+ 
+    </style>
+</head>
+<body>
+    <h3>Home</h3>
+    <a href="/new">Create New Dog</a>
+    <% for (idx in dogs) { %>
+    <p> Name: <%= dogs[idx].name %> Weight: <%= dogs[idx].weight %> Color: <%= dogs[idx].color %><a href='/<%= dogs[idx]._id %>/edit/'>Edit Dog </a><a href="'/<%= dogs[idx]._id %>/delete/">Delete Dog</a></p>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,7 @@
+1.use my_first_db (creates database or uses current one)
+2. db.createCollection('students')
+3. db.students.insert({name: 'John', home_state: 'DE', lucky_number: 7, birthday: {month: 2, day: 22, year: 1985}})
+4. Did
+5. db.students.find()
+6. db.students.find({$or: [{home_state: 'CA'}, {home_state: 'DC']}).pretty()
+7. 
