@@ -19,6 +19,8 @@ var server = app.listen(8000, function() {
 
  //sets up an array persons to hold all users
 var users = []
+//sets up an array that holds all the messages
+var messages = []
 //create a method in all user objects that can look for a user
 var is_user = function(user) {
     //find the user length, which is always changing
@@ -53,5 +55,8 @@ io.sockets.on('connection', function (socket) {
 			//emits to client the messages #3
 			socket.emit("load_messages", {current_user: data.user, messages: messages})
 		}
+	})
+	socket.on("#new_message", function (data){
+		console.log(data);
 	})
 })

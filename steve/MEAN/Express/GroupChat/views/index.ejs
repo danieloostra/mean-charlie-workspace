@@ -5,17 +5,39 @@
     <script type ="text/javascript">
        
     	$(document).ready(function (){
+            //sets up the socket
             var socket = io.connect();
-            //prompts the user 
-            var name = prompt("Please enter your name to chat");
+            //creates variable to hold current user
+            var current_user;
+            //Creates a New User Function
+            var new_user = function() {
+                var name = prompt("Please enter your name.");
+                socket.emit("page_load", {user: name})
+            }
+            //call new user function
+            new_user();
+
             //emits the name entered from client to server #1
             socket.emit("page_load", {user: name});
+            //listens for existing user 
             socket.on("existing_user", function(data) {
-                console.log(data);
+                $("#error").html(data.error);
+                new_user();
+                console.log("From existing" + data);
             })
+            //listens for load_messages
             socket.on("load_messages", function(data) {
-                console.log(data);
+                console.log("load_messages" + data.current_user +data.messages);
+                $("#error").html('');
+                current_user = data.current_user;
             })
+
+            
+            $("#new_message").submit(function(){
+                socket.emit("new_message", {message: $("#message").val(), user: current_user})
+                return false;
+            })
+            
     	});
     </script>
     <style type="text/css">
@@ -25,9 +47,9 @@
 <body>
     <div id ="container">
         <p>Conversation Board</p>
-        <div></div>
-        <form>
-            <input type='text' placeholder="enter your message here">
+        <div id='error'></div>
+        <form id="new_message">
+            <input type='text' placeholder="enter message" id='message'> 
             <input type='submit' value='Send'>
         </form>
 </body>
