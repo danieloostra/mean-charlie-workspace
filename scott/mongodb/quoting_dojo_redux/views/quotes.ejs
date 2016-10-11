@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<h1>Here are the awesome quotes!</h1>
+	<% for (var x in users) { %>
+	<p>"<%= users[x].quote %>"</p>
+	<p>- <%= users[x].name %> at <%= users[x].date %></p>
+	<% } %>
+</body>
+</html>

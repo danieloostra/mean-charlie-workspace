@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<form action="/users" method="post">
+		Name: <input type="text" name="name">
+		Age: <input type="text" name="age">
+		<input type="submit" val="Submit">
+	</form>
+	<% for (var x in users) { %>
+		<p>Name: <%= users[x].name %></p>
+		<p>Age: <%= users[x].age %></p>
+	<% } %>
+</body>
+</html>
