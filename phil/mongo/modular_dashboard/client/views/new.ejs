@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Muppet</title>
+    </head>
+    <body>
+        <h2>Add New Muppet</h2>
+        <form action="/muppets" method="post">
+            <p>Name: <input type="text" name="name" /></p>
+            <p>Color: <input type="text" name="color" /></p>
+            <p>
+                Type:
+                <select name="type">
+                    <option value="human">Human</option>
+                    <option value="animal">Animal</option>
+                    <option value="monster">Monster</option>
+                </select>
+            </p>
+            <input type="submit" value="Submit" />
+        </form>
+        <p><a href="/">Back</a></p>
+    </body>
+</html>
