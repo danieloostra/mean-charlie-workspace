@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<h3>The Dojo Message Board</h3>
+	<form action='/' method='post'>
+		<h6>Name <input type='text' name='name'></h6>
+		<h6>Message <textarea rows='5' cols='50' name='message'></textarea><h6>	
+		<input type='submit' value='Post Message!'>
+	</form>
+
+	 <% for (var x in messages) { %>
+        <h3>Name: <%= messages[x].name %></h3>
+        <h3>Message: <%= messages[x].message %></h3>
+        <hr>
+        <form action=<%='/comment/' + messages[x]._id %> method='post'>
+        	<h6>Name <input type='text' name='comment_name'></h6>
+        	<h6>Comment <textarea rows='5' cols='50' name='comment'></textarea></h6>
+        	<input type='submit' value='Post Comment!'>
+   			<% for (var y in comments) { %>
+   				<h6>Name: <%= comments[y].comment_name %></h6>
+   				<h6>Comment: <%= comments[y].comment %></h6>
+   				<hr>
+   			<% } %>
+
+        </form>
+    <% } %>
+
+	<h3>Message!</h3>
+
+
+</body>
+</html>
