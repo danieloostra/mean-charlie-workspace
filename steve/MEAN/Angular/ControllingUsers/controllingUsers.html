@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title></title>
+  <script src='bower_components/angular/angular.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('usersController', ['$scope', function ($scope){
+      // we don't need a factory for this demo, it wouldn't make a difference if we did.
+        $scope.friends = [
+         $scope.my 
+        ];
+    }])
+  </script>
+</head>
+<body ng-app='myApp'>
+    <div ng-controller='usersController'>
+      <form>
+        <h3>First Name: <input type='text' name='firstName'></h3>
+        <h3>Last Name: <input type='text' name='lastName'></h3>
+        <h3>Favorite Language: <input type='text' name='favLang'><input type='submit' value="Create User"></h3>
+      </form>
+      <table>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Fav Language</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+
+    </div>
+</body>
+</html>
