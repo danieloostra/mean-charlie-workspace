@@ -4,20 +4,28 @@
   <script src='bower_components/angular/angular.js'></script>
   <script type='text/javascript'>
     var myApp = angular.module('myApp', []);
-    myApp.controller('usersController', ['$scope', function ($scope){
+    myApp.controller('usersController',function ($scope){
       // we don't need a factory for this demo, it wouldn't make a difference if we did.
-        $scope.friends = [
-         $scope.my 
-        ];
-    }])
+        $scope.myData = [];
+        $scope.addData = function() {
+          $scope.myData.push($scope.user);
+          $scope.user = {};
+          console.log($scope.user);
+        }
+        $scope.removeData = function(selData) {
+          $scope.myData.splice($scope.myData.indexOf(selData));
+        }
+
+    })
   </script>
 </head>
 <body ng-app='myApp'>
     <div ng-controller='usersController'>
       <form>
-        <h3>First Name: <input type='text' name='firstName'></h3>
-        <h3>Last Name: <input type='text' name='lastName'></h3>
-        <h3>Favorite Language: <input type='text' name='favLang'><input type='submit' value="Create User"></h3>
+        <h3>First Name: <input type='text'  ng-model='user.firstName'></h3>
+        <h3>Last Name: <input type='text' name='lastName' ng-model='user.lastName'></h3>
+        <h3>Favorite Language: <input type='text' name='favLang' ng-model='user.favLang'>
+        <input type='submit' ng-click='addData()' value="Create User"></h3>
       </form>
       <table>
         <tr>
@@ -26,11 +34,11 @@
           <th>Fav Language</th>
           <th>Actions</th>
         </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr ng-repeat='data in myData'>
+          <td>{{data.firstName}}</td>
+          <td>{{data.lastName}}</td>
+          <td>{{data.favLang}}</td>
+          <td><a href="" ng-click="removeData(data)">Remove</a></td>
         </tr>
       </table>
 
