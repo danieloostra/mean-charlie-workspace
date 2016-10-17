@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+    <head>
+        <meta charset="utf-8">
+        <title>Products + Orders</title>
+        <script src="./bower_components/angular/angular.min.js" charset="utf-8"></script>
+        <script src="./factories/product.js" charset="utf-8"></script>
+        <script src="./controllers/products.js" charset="utf-8"></script>
+        <script src="./controllers/orders.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div ng-controller='productsController'>
+            <h3>Product Stuff</h3>
+            <form ng-submit='addProduct()'>
+                <p>Product Name: <input type="text" ng-model='newProduct.name' /></p>
+                <p>Product Price: <input type="text" ng-model='newProduct.price' /></p>
+                <input type="submit" value="Create Product" />
+            </form>
+            <table ng-if='products.length'>
+                <tr>
+                    <th ng-click=sortBy('name')>Name</th>
+                    <th ng-click=sortBy('price')>Price</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat='product in products track by $index'>
+                    <td>{{product.name}}</td>
+                    <td>${{product.price}}</td>
+                    <td><button type="button" ng-click='removeProduct($index)'>Remove Product</button></td>
+                </tr>
+            </table>
+        </div>
+        <div ng-controller='ordersController'>
+            <h3>Order Stuff</h3>
+            <table ng-if='products.length'>
+                <tr>
+                    <th ng-click=sortBy('name')>Name</th>
+                    <th ng-click=sortBy('price')>Price</th>
+                    <th ng-click=sortBy('quantity')>Qty Available</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat='product in products track by $index'>
+                    <td>{{product.name}}</td>
+                    <td>${{product.price}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td><button type="button" ng-if="product.quantity>0" ng-click='buyProduct($index)'>Buy</button></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

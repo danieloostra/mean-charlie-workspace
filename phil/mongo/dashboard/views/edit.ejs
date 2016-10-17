@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Edit Muppet</title>
+    </head>
+    <body>
+        <h2>Edit <%= muppet.name %></h2>
+        <form action="/muppets/<%= muppet.id %>" method="post">
+            <p>
+                Name:
+                <input type="text" name="name" value="<%= muppet.name %>" />
+            </p>
+            <p>
+                Color:
+                <input type="text" name="color" value="<%= muppet.color %>" />
+            </p>
+            <p>
+                Type:
+                <select name="type">
+                    <option value="human">Human</option>
+                    <option value="animal">Animal</option>
+                    <option value="monster">Monster</option>
+                </select>
+            </p>
+            <input type="submit" value="Submit" />
+        </form>
+        <p><a href="/muppets/<%= muppet.id %>">View</a> | <a href="/">Back</a></p>
+        <form action="/muppets/<%= muppet.id %>/destroy" method="post">
+            <input type="submit" value="Delete Muppet" />
+        </form>
+    </body>
+</html>
