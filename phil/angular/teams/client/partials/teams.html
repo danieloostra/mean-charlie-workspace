@@ -1,0 +1,18 @@
+<form ng-submit='addTeam()'>
+    <p>Team Name: <input type="text" ng-model="newTeam.name" />
+    <input type="submit" value="Add Team" /></p>
+</form>
+<table ng-if="teams.length">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="team in teams track by $index">
+            <td>{{team.name}}</td>
+            <td><button type="button" ng-click="removeTeam($index)">Remove Team</button></td>
+        </tr>
+    </tbody>
+</table>
