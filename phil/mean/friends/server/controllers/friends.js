@@ -3,52 +3,40 @@ var mongoose = require('mongoose');
 var Friend = mongoose.model('Friend');
 function FriendsController() {
     this.index = function(req, res) {
-        Friend.find({}, function(err, muppets) {
-            if (err) {
-                res.json({error: err});
-            } else {
-                res.json({placeholder:'index'});
-            }
+        Friend.find({}, function(err, friends) {
+            if (err) { console.log(`Error: ${err}`); }
+            res.json(friends);
         });
     }
     this.show = function(req, res) {
         Friend.findOne({_id:req.params.id}, function(err, friend) {
-            if (err) {
-                res.json({error: err});
-            } else {
-                res.json({placeholder:'show'});
-            }
+            if (err) { console.log(`Error: ${err}`); }
+            res.json(friend);
         });
     }
     // POST methods
     this.create = function(req, res) {
-        var friend = req.body.friend;
-        friend.save(function(err) {
-            if (err) {
-                res.json({error:err});
-            } else {
-                res.json({placeholder:'create'});
-            }
+        Friend.create(req.body, function(err, result) {
+            if (err) { console.log(`Error: ${err}`); }
+            res.json(result);
         });
     }
     this.update = function(req, res) {
-        Friend.update({_id:req.params.id}, {$set: {
-
-        }}, function(err, muppet) {
-            if (err) {
-                res.json({error:err});
-            } else {
-                res.json({placeholder:'update'});
-            }
+        Friend.findOne({_id:req.params.id}, function(err, friend) {
+            if (err) { console.log(`Error: ${err}`); }
+            friend.first_name = req.body.first_name;
+            friend.last_name = req.body.last_name;
+            friend.dob = req.body.dob;
+            friend.save(function(err, updatedFriend) {
+                if (err) { console.log(`Error: ${err}`); }
+                res.json(updatedFriend);
+            });
         });
     }
     this.delete = function(req, res) {
-        Muppet.remove({_id:req.params.id}, function(err) {
-            if (err) {
-                res.json({error:err});
-            } else {
-                res.json({placeholder:'delete'});
-            }
+        Muppet.remove({_id:req.params.id}, function(err, result) {
+            if (err) { console.log(`Error: ${err}`); }
+            res.json(result);
         });
     }
 }

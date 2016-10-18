@@ -24,7 +24,7 @@ process.on('SIGINT', function() {
 });
 
 fs.readdirSync(models_path).forEach(function(file) {
-    if (/.js$/i.test(file)) {
+    if (/\.js$/i.test(file)) {
         require(path.join(models_path, file));
     }
 });
