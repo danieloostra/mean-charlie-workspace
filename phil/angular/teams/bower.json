@@ -1,0 +1,17 @@
+{
+  "name": "teams",
+  "authors": [
+    "Phil Boothe <pfb3cn@virginia.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
