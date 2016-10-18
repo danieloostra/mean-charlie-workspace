@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <title></title>
+ <!-- THESE TWO VERSIONS BELOW MUST MATCH (good thing bower will catch that for us, but be aware if you are using CDN's)!!! -->
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+      <p><a href="#/">Players </a><a href="#/teams">Teams </a><a href="#/associations">Associations </a></p>
+      <div ng-view>
+
+      </div>
+  </body>
+</html>
