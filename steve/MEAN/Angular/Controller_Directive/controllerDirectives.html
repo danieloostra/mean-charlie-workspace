@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en' ng-app = 'app'>
+<head>
+	<title>Controller and Directives</title>
+<script src = 'bower_components/angular/angular.js'></script>
+<script> var app = angular.module('app', []);
+app.controller('myController', ['$scope', function($scope){
+    $scope.printController = function(){
+      console.log($scope);
+      $scope.foods = [];
+
+    }
+  }]);
+</script>
+</head>
+<body ng-controller="myController">
+	<div ng-controller = "myController" id= "myController">
+		<h3>Favorite Food <button value='Add Food' name='add_food'>Add Food!</button><input type='text' name='input' ng-model= 'myModel'></h3>
+		<div id='model' ng-if = 'myModel'>
+			<h3>Current Typing<span> {{myModel}} </span></h3> 
+			<textarea rows='20' cols='20'></textarea>
+		</div>
+
+	</div>
+</body>
+</html>

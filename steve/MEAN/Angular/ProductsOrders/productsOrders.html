@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="productsOrders.js"></script>
+</head>
+<body ng-app='myApp'>
+	<div ng-controller = "productController">
+    <fieldset><legend>Products Controller</legend>
+  <form ng-submit = "create()">
+  <input type="text" ng-model = "product.name">
+  <input type="number" step="0.01" ng-model = "product.price">
+  <input type="submit" value = "Add Product">
+  </form>
+  <table>
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody ng-repeat="product in products | orderBy: 'price' track by $index ">
+        <tr>
+          <td>{{product.name}}</td>
+          <td>{{product.price | currency:"USD $"}}</td>
+          <td><button ng-click = "delete($index)">Delete Product</button></td>
+        </tr>
+      </tbody>
+  </table>
+    </fieldset>
+  </div>
+  	<div ng-controller = 'orderController'>
+		<fieldset>
+			<legend>Orders Controller</legend>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<td>Gty Available</td>
+					<th>Actions</th>
+				</tr>
+				<tr ng-repeat="product in products | orderBy: 'price' ">
+					<td>{{product.name}}</td>
+					<td>{{product.price | currency:"USD $"}}</td>
+					<td>{{product.quantity}}</td>
+					<td><button ng-click="update(id)">Buy Product</button></td>
+				</tr>
+			</table>
+		</fieldset>
+	</div>
+</body>
+</html>

@@ -4,11 +4,11 @@
 </head>
 <body>
 	<h2>Welcome to Quoting Dojo</h2>
-	<form action ='/' method='post'>
-		<h3>Your name: <input type='text' id='name'></h3>
-		<h3>Your quote: <textarea id='name' rows='4' cols='50'></textarea></h3>
+	<form action ='/quotes' method='post'>
+		<h3>Your name: <input type='text' id='name' name='name'></h3>
+		<h3>Your quote: <textarea id='name' rows='4' cols='50' name='quote'></textarea></h3>
 		<input type='submit' value= 'Add My Quote!'>
-		<a href="/">Skip to Quotes!</a>
+		<a href="/quotes">Skip to Quotes!</a>
 	</form>
 </body>
 </html>
