@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>Products with a Factory</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script>
+	var app = angular.module('app', []);
+
+	app.factory('productFactory', () => {
+		var products = [];
+		var factory = {};
+
+		factory.addProduct = (product) => {
+			products.push(product);
+		}
+		factory.removeProduct = (index) => {
+			products.splice(index, 1);
+		}
+		factory.getProducts = () => {
+			return products;
+		}
+
+		return factory;
+	});
+
+	app.controller('productcontroller', ['productFactory', function (productFactory) {
+		this.addProduct = () => {
+			this.newProduct.quantity = 50;
+			productFactory.addProduct(this.newProduct);
+			this.products = productFactory.getProducts();
+			this.newProduct = {};
+		}
+		this.removeProduct = (index) => {
+			productFactory.removeProduct(index);
+			this.products = productFactory.getProducts();
+		}
+		this.sort = () => {
+			console.log('a');
+			if (this.products[0] <= this.products[this.products.length - 1]) {
+				this.products.sort((a, b) => {return a - b});
+			} else {
+				this.products.sort((a, b) => {return b - a});
+			}
+		}
+		this.products = [];
+	}]);
+
+	app.controller('ordercontroller', ['productFactory', function (productFactory) {
+		this.buyProduct = (index) => {
+			this.products = productFactory.getProducts();
+			this.products[index].quantity -= 1;
+
+		}
+		this.sort = () => {
+			console.log('a');
+			if (this.products[0] <= this.products[this.products.length - 1]) {
+				this.products.sort((a, b) => {return a - b});
+			} else {
+				this.products.sort((a, b) => {return b - a});
+			}
+		}
+		this.products = productFactory.getProducts();
+	}])
+	</script>
+</head>
+<body>
+	<div ng-controller="productcontroller as pc">
+		<form>
+			Product Name: <input type="text" ng-model="pc.newProduct.name">
+			Product Price: <input type="text" ng-model="pc.newProduct.price">
+			<input type="submit" value="Add Product" ng-click="pc.addProduct()">
+		</form>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th><a ng-click="pc.sort()">Price</a></th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="product in pc.products track by $index">
+				<td>{{product.name}}</td>
+				<td>{{product.price | currency:"$":2}}</td>
+				<td><button ng-click="pc.removeProduct($index)">Delete Product</button></td>
+			</tr>
+		</table>
+	</div>
+	<div ng-controller="ordercontroller as oc">
+		<table>
+			<tr>
+				<th>Name</th>
+				<th><a ng-click="oc.sort()">Price</a></th>
+				<th>Quantity Available</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="product in oc.products track by $index" ng-if="product.quantity > 0">
+				<td>{{product.name}}</td>
+				<td>{{product.price | currency:"$":2}}</td>
+				<td>{{product.quantity}}</td>
+				<td><button ng-click="oc.buyProduct($index)">Buy</button></td>
+			</tr>
+		</table>
+</body>
+</html>

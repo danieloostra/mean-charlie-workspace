@@ -1,0 +1,7 @@
+<div ng-controller="newController as nc">
+	<h1>New</h1>
+	<form ng-submit="nc.create()">
+		<input type="text" name="name" ng-model="nc.newFriend.name">
+		<input type="submit" value="Add">
+	</form>
+</div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Controlling Users</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script>
+	var myApp = angular.module('myApp', []);
+	myApp.controller('usercontroller', ['$scope', ($scope) => {
+		$scope.users = [];
+		$scope.addUser = (newUser) => {
+			$scope.users.push(newUser);
+			$scope.newUser = {};
+		}
+		$scope.removeUser = (index) => {
+			$scope.users.splice(index, 1);
+		}
+	}]);
+	</script>
+</head>
+<body ng-controller="usercontroller">
+	<form>
+		First Name: <input type="text" ng-model="newUser.first">
+		Last Name: <input type="text" ng-model="newUser.last">
+		Favorite Language: <input type="text" ng-model="newUser.lang">
+		<input type="submit" value="Create User" ng-click="addUser(newUser)">
+	</form>
+	<table>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Fav Language</th>
+			<th>Actions</th>
+		</tr>
+		<tr ng-repeat="user in users track by $index">
+			<td>{{user.first}}</td>
+			<td>{{user.last}}</td>
+			<td>{{user.lang}}</td>
+			<td><button ng-click="removeUser($index)">Delete User</button></td>
+	</table>
+</body>
+</html>

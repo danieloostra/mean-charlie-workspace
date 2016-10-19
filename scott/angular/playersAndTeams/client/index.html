@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Players and Teams</title>
+	<script src="angular/angular.js"></script>
+	<script src="angular-route/angular-route.js"></script>
+	<script>
+	var app = angular.module('app', ['ngRoute']);
+
+	app.config(($routeProvider) => {
+		$routeProvider.when('/players', {
+			templateUrl: 'partials/players.html'
+		}).when('/teams', {
+			templateUrl: 'partials/teams.html'
+		}).when('/associations', {
+			templateUrl: 'partials/associations.html'
+		}).otherwise({
+			redirectTo: '/'
+		});
+	});
+
+	app.factory('playerFactory', () => {
+		var players = [];
+		var factory = {};
+
+		factory.addPlayer = (player) => {
+			players.push(player);
+		}
+		factory.removePlayer = (index) => {
+			players.splice(index, 1);
+		}
+		factory.getPlayers = () => {
+			return players;
+		}
+
+		return factory;
+	});
+
+	app.factory('teamFactory', () => {
+		var teams = [];
+		var factory = {};
+
+		factory.addTeam = (team) => {
+			teams.push(team);
+		}
+		factory.removeTeam = (index) => {
+			teams.splice(index, 1);
+		}
+		factory.getTeams = () => {
+			return teams;
+		}
+
+		return factory;
+	});
+
+	app.factory('associationFactory', () => {
+		var associations = [];
+		var factory = {};
+
+		factory.addAssociation = (association) => {
+			associations.push(association);
+		}
+		factory.removeAssociation = (index) => {
+			associations.splice(index, 1);
+		}
+		factory.getAssociations = () => {
+			return associations;
+		}
+
+		return factory;
+	})
+
+	app.controller('players', ['playerFactory', function (playerFactory) {
+		this.addPlayer = () => {
+			playerFactory.addPlayer(this.player);
+			this.player = {};
+		}
+		this.removePlayer = (index) => {
+			playerFactory.removePlayer(index);
+		}
+		this.players = playerFactory.getPlayers();
+	}]);
+
+	app.controller('teams', ['teamFactory', function (teamFactory) {
+		this.addTeam = () => {
+			teamFactory.addTeam(this.team);
+			this.team = {};
+		}
+		this.removeTeam = (index) => {
+			teamFactory.removeTeam(index);
+		}
+		this.teams = teamFactory.getTeams();
+	}]);
+
+	app.controller('associations', ['playerFactory', 'teamFactory', 'associationFactory', function (playerFactory, teamFactory, associationFactory) {
+		this.associations = associationFactory.getAssociations();
+		this.players = playerFactory.getPlayers();
+		this.teams = teamFactory.getTeams();
+		this.assign = () => {
+			associationFactory.addAssociation(this.association)
+			this.association = {};
+		}
+		this.removeAssignment = (index) => {
+			this.associations.splice(index, 1);
+		}
+	}])
+	</script>
+</head>
+<body ng-app="app">
+	<a href="#/players"><button>Players</button></a>
+	<a href="#/teams"><button>Teams</button></a>
+	<a href="#/associations"><button>Associations</button></a>
+	<div ng-view="">
+	</div>
+</body>
+</html>

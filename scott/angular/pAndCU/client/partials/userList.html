@@ -1,0 +1,14 @@
+<div ng-controller="contwo as ct">
+	<table>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Fav Language</th>
+		</tr>
+		<tr ng-repeat="user in ct.users">
+			<td>{{user.first}}</td>
+			<td>{{user.last}}</td>
+			<td>{{user.lang}}</td>
+		</tr>
+	</table>
+</div>

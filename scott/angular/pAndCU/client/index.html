@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Partials and Custom Users</title>
+	<script src="angular/angular.js"></script>
+	<script src="angular-route/angular-route.js"></script>
+	<script>
+	var app = angular.module('app', ['ngRoute']);
+
+	app.config(($routeProvider) => {
+		$routeProvider.when('/partial1', {
+			templateUrl: 'partials/customizeUsers.html'
+		}).when('/partial2', {
+			templateUrl: 'partials/userList.html'
+		}).otherwise({
+			redirectTo: '/'
+		});
+	});
+
+	app.factory('userFactory', () => {
+		var users = [];
+		var factory = {};
+
+		factory.addUser = (user) => {
+			users.push(user);
+		}
+		factory.removeUser = (index) => {
+			users.splice(index, 1);
+		}
+		factory.getUsers = () => {
+			return users;
+		}
+
+		return factory;
+	});
+
+	app.controller('conone', ['userFactory', function (userFactory) {
+		this.addUser = () => {
+			userFactory.addUser(this.user);
+			this.user = {};
+		}
+		this.removeUser = (index) => {
+			userFactory.removeUser(index);
+		}
+		this.users = userFactory.getUsers();
+	}]);
+
+	app.controller('contwo', ['userFactory', function (userFactory) {
+		this.users = userFactory.getUsers();
+	}]);
+	</script>
+</head>
+<body ng-app="app">
+	<a href="#/partial1"><button>Customize Users</button></a>
+	<a href="#/partial2"><button>User List</button></a>
+	<div ng-view="">
+	</div>
+</body>
+</html>

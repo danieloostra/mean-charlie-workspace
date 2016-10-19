@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<p id="current">Current name: <%= mongoose[0].name %> </p>
+	<form action="/update/<%=mongoose[0]._id%>" method="post">
+		Name: <input type="text" name="name">
+		<input type="submit" value="Edit">
+	</form>
+</body>
+</html>

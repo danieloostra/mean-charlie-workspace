@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<a href="/new"><button>New</button></a>
+	<% for (var x in mongooses) { %>
+	<p>Name: <%= mongooses[x].name %></p>
+	<a href="/<%=mongooses[x]._id%>"><button>More Info</button></a>
+	<a href="/edit/<%=mongooses[x]._id%>"><button>Edit</button></a>
+	<a href="/<%=mongooses[x]._id%>/destroy"><button>Delete</button></a>
+	<% } %>
+</body>
+</html>
