@@ -1,0 +1,22 @@
+<p>Find Friend: <input type="text" ng-model='filter_name' /></p>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat='friend in friends | orderBy:"dob" | filter:filter_name'>
+            <td>{{friend.first_name}} {{friend.last_name}}</td>
+            <td>{{friend.dob | date:'mediumDate'}}</td>
+            <td>
+                <a href="#/show/{{friend._id}}">Show</a> |
+                <a href="#/edit/{{friend._id}}">Edit</a> |
+                <a style="color:red" ng-click="delete(friend._id)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h4><a href="#/new">Add New Friend</a></h4>

@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <th>First Name:</th>
+        <td>{{friend.first_name}}</td>
+    </tr>
+    <tr>
+        <th>Last Name:</th>
+        <td>{{friend.last_name}}</td>
+    </tr>
+    <tr>
+        <th>Date of Birth:</th>
+        <td>{{friend.dob | date:'mediumDate'}}</td>
+    </tr>
+    <tr>
+        <th>Added Friend On:</th>
+        <td>{{friend.createdAt | date:'mediumDate'}}</td>
+    </tr>
+</table>
+<p>
+    <a href="#/">Home</a> |
+    <a href="#/edit/{{friend._id}}">Edit User</a> |
+    <a style="color:red" ng-click="delete(friend._id)">Delete</a>
+</p>
