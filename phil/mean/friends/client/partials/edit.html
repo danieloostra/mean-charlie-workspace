@@ -1,0 +1,11 @@
+<form ng-submit='updateFriend()'>
+    <p><input type="text" ng-model='friend.first_name' /> - First Name</p>
+    <p><input type="text" ng-model='friend.last_name' /> - Last Name</p>
+    <p><input type="date" ng-model='friend.dob' /> - Birthday</p>
+    <input type="submit" value="Update Friend" />
+</form>
+<p>
+    <a href="#/">Home</a> |
+    <a href="#/show/{{friend._id}}">Show User</a> |
+    <a style="color:red" ng-click="delete(friend._id)">Delete</a>
+</p>

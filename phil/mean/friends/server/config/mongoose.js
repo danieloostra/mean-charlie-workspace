@@ -1,4 +1,4 @@
-console.log('future mongoose connection and model loading');
+console.log('loading mongoose connection and model...');
 var mongoose = require('mongoose');
 var fs = require('fs');
 var path = require('path');
@@ -24,7 +24,7 @@ process.on('SIGINT', function() {
 });
 
 fs.readdirSync(models_path).forEach(function(file) {
-    if (/.js$/i.test(file)) {
+    if (/\.js$/i.test(file)) {
         require(path.join(models_path, file));
     }
 });

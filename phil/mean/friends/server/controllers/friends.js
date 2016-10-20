@@ -1,55 +1,67 @@
-console.log('loading friends controller');
+console.log('loading friends controller...');
 var mongoose = require('mongoose');
 var Friend = mongoose.model('Friend');
 function FriendsController() {
     this.index = function(req, res) {
-        Friend.find({}, function(err, muppets) {
+        Friend.find({}, function(err, friends) {
             if (err) {
-                res.json({error: err});
+                console.log(`Error: ${err}`);
+                res.json(err);
             } else {
-                res.json({placeholder:'index'});
+                res.json(friends);
             }
         });
-    }
+    };
     this.show = function(req, res) {
         Friend.findOne({_id:req.params.id}, function(err, friend) {
             if (err) {
-                res.json({error: err});
+                console.log(`Error: ${err}`);
+                res.json(err);
             } else {
-                res.json({placeholder:'show'});
+                res.json(friend);
             }
         });
     }
     // POST methods
     this.create = function(req, res) {
-        var friend = req.body.friend;
-        friend.save(function(err) {
+        console.log("req.body: ", req.body);
+        Friend.create(req.body, function(err, friend) {
             if (err) {
-                res.json({error:err});
+                console.log(`Error: ${err}`);
+                res.json(err);
             } else {
-                res.json({placeholder:'create'});
+                res.json(friend);
             }
         });
     }
     this.update = function(req, res) {
-        Friend.update({_id:req.params.id}, {$set: {
-
-        }}, function(err, muppet) {
-            if (err) {
-                res.json({error:err});
+        Friend.findOne({_id:req.params.id}, function(err1, friend) {
+            if (err1) {
+                console.log(`Error: ${err1}`);
+                res.json(err1);
             } else {
-                res.json({placeholder:'update'});
+                friend = req.body;
+                friend.save(function(err2, updated_friend) {
+                    if (err2) {
+                        console.log(`Error: ${err2}`);
+                        res.json(err2);
+                    } else {
+                        res.json(updated_friend);
+                    }
+                });
             }
         });
     }
     this.delete = function(req, res) {
-        Muppet.remove({_id:req.params.id}, function(err) {
+        Friend.remove({_id:req.params.id}, function(err, result) {
             if (err) {
-                res.json({error:err});
+                console.log(`Error: ${err}`);
+                res.json(err);
             } else {
-                res.json({placeholder:'delete'});
+                res.json(result);
+
             }
         });
     }
 }
-module.export = new FriendsController();
+module.exports = new FriendsController();
