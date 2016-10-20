@@ -1,0 +1,17 @@
+{
+  "name": "player_team",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "snebaybay <spokharel1991@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/snebaybay/pacman",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
