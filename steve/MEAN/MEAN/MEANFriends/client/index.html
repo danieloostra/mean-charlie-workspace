@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- DONT FORGET TO ADD YOUR ANGULAR APP! -->
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>Awesome Friends</title>
+    <!-- Angular from bower_components, otherwise find the CDN -->
+    <script src="angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+    <!-- End Bower Components -->
+    <script src="assets/app.js" charset="utf-8"></script>
+    <script src="controllers/newController.js"></script>
+    <script src="controllers/editController.js"></script>
+    <script src="controllers/showController.js"></script>
+    <script src="factories/friendsFactory.js"></script>
+  </head>
+  <body>
+    <div ng-controller="newController">
+  <table>
+        <tr>
+          <td>Name</td>
+          <td>Show</td>
+          <td>Update</td>
+          <td>Delete</td>
+        </tr>
+        <tr ng-repeat='friend in friends'>
+          <td>{{friend.first_name}}</td>
+          <td><button ng-click='show(friend._id)'>Show</a></td>
+          <td><a href="#edit/{{friend._id}}">Update</a></td>
+          <td><button ng-click='delete(friend._id)'>Delete</button></td>
+        </tr>
+    </table>
+</div>
+
+    <h3>This is the index!</h3>
+
+  	<p><a href="#/">Main</a></p>
+  	<a href="#show/:id">Show</a>
+  	<a href="#new">Create</a>
+  	<a href="#edit/:id">Update</a>
+
+  	<div ng-view></div>
+    <!-- Links to your new and edit pages here.  Review Angular Partials if you've forgotten ) -->
+    <!-- not so subtle hint: ng-view ??? -->
+  </body>
+</html>
