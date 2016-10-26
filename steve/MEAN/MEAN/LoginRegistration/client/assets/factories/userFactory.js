@@ -18,9 +18,9 @@ app.factory('userFactory', ['$http', function($http) {
  			});
  		}
  	this.login = function(data, callback) {
- 		console.log("Factory", data);
  		$http.post('/login', data).then(
  			function(returned_data) {
+ 				console.log('Factory Returned Data', returned_data);
  				callback(returned_data);
  			});
  		}
