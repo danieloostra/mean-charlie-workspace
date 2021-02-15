@@ -1,0 +1,17 @@
+
+<div ng-controller='loginController'>
+	<form ng-submit='loginUser()'>
+		<p>Enter a Username to continue</p>
+		<p><input type='text' ng-model='user.username' placeholder="username"><input type='submit' value='login'></p>
+	</form>
+</div>
+<div ng-controller='indexController'>
+		<table>
+			<tr>
+				<th>Usernames</th>
+			</tr>
+			<tr ng-repeat='user in users'>
+				<td>{{user.username}}</td>
+			</tr>
+		</table>
+	</div>

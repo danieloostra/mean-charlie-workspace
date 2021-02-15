@@ -1,0 +1,19 @@
+<div ng-controller='indexController'>
+	<h2>Users Table</h2>
+	<table>
+		<tr>
+			<th>Email</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Password</th>
+			<th>Birthday</th>
+		</tr>
+		<tr ng-repeat='user in users'>
+			<td>{{user.email}}</td>
+			<td>{{user.first_name}}</td>
+			<td>{{user.last_name}}</td>
+			<td>{{user.password}}</td>
+			<td>{{user.birthday}}</td>
+		</tr>
+	</table>
+</div>

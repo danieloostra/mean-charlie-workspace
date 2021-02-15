@@ -1,0 +1,19 @@
+<button ng-click='logOut()'>Sign Out</button>
+<h1>Full MEAN Wall</h1>
+<h2>Welcome {{user.first_name}} {{user.last_name}}</h2>
+<form ng-submit='addMessage()'>
+	<p>Post a message</p><textarea name='message' ng-model='message.message'></textarea>
+	<input type="submit" name="message" value='Post a message'>
+</form>
+<div ng-repeat='messageItem in messages track by $index'>
+ 	<h3>{{messageItem._user.first_name}} - {{messageItem.createdAt | date: 'h:mm a MM/dd/yy' }}</h3>
+	<p>Message: {{messageItem.message}}</p>
+	<div ng-repeat='commentItem in messageItem.comment'>
+		<b>{{commentItem._user.first_name}} - {{commentItem.createdAt | date: 'h:mm a MM/dd/yy'}}</b>
+		<p>Comment: {{commentItem.comment}}</p>
+	</div>
+	<form ng-submit ='addComment($index)'>
+		<p>Post a comment</p><textarea name='comment' ng-model='comments[$index].comment'></textarea>
+		<input type="submit" name="comment" value="Post a comment">
+	</form>
+</div>
